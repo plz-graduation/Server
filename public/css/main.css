@@ -1,0 +1,348 @@
+
+body{
+    overflow: hidden;
+    background: #f7f7f7;
+}
+.dark-bg{ 
+    width:100%;
+    height:101%; 
+    position: absolute; /* 다른 요소들 위로 겹쳐질 수 있게함 */
+    left : 50%;
+    top : 50%;
+    transform: translate( -50%, -50% ); /* 왼쪽 위 꼭짓점의 위치가 위에서 50%, 왼쪽에서 50%이므로, 텍스트가 정가운데에 있지 않으므로 transform 속성을 추가 */
+}
+
+.dark-bg--strict{background-color:rgba(0, 0, 0, 0.8);}
+.dark-bg--middle{background-color:rgba(0, 0, 0, 0.6);}
+.dark-bg--lenient{background-color:rgba(0, 0, 0, 0.4);}
+
+.shadow{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.20) !important;
+}
+
+.none {
+    display: none;
+}
+
+.navbar {
+    background-color: #fff;
+    height: 75px;
+}
+
+.navbar__main-logo{
+    margin-left: 15%;
+}
+
+.navbar__img{   /* Yomo 로고 */
+    width: 170px;
+    height: 100%;
+}
+
+.navbar__content{    /* navbar의 Help, About, 언어 설정 요소를 감싸는 태그 */
+    margin-right: 23vw;
+}
+
+.navbar__content a {  /**/
+    color: black;  /* 색상을 지정하지 않으면 #007bff색으로 표시됨 */ 
+    font-size: large;   /* 글자 크기를 키움 */
+    font-family: "Roboto", "Arial", "Malgun Gothic", "맑은 고딕", "Dotum", sans-serif;  /* 폰트 지정 */
+    margin-right: 10px; /* Help, About, 언어 설정 요소 간의 간격 */
+}
+
+.navbar__languge-selector {    /* navbar의 언어 설정 요소에 대한 속성 */
+    border: 0;
+    font-size: large;
+    font-weight: bold;
+}
+
+.content-container {    /* navbar와 footer을 제외한 영역 */
+    position: absolute;
+    top:0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    /*align-items: center;*/
+    justify-content: center;
+    align-items: center;
+}
+
+.content-container__wrap {
+    width: 730px;
+    height: 520px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.video-box{
+    display : flex;
+    width : 100%;
+}
+/************************* 체크박스를 대한 속성 (애니메이션 포함) ****************************/
+
+.checkbox {
+    margin-left: 10px;  /* 카테고리명 보다 오른쪽에 위치하도록 하기 위한 속성*/
+    margin-top: 10px;   /*체크박스 간의 간격 */
+}
+
+.checkbox input {
+    display: none;  /* 체크박스의 box를 보이지 않도록 함 */
+}
+
+.checkbox span {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.checkbox .icon {
+    position: relative;
+    width: 17px;
+    height: 17px;
+    border: 1px solid #c8ccd4;
+    border-radius: 3px;
+}
+
+.checkbox .icon::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    width: 5px;
+    height: 11px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg) scale(0);
+    transition: all 0.3s ease;
+    transition-delay: 0.15s;
+    opacity: 0;
+}
+
+.checkbox .text {
+    margin-left: 5px;
+}
+
+@keyframes jelly {
+    from {
+        transform: scale(1, 1);
+    }
+    30% {
+        transform: scale(1.25, 0.75);
+    }
+    40% {
+        transform: scale(0.75, 1.25);
+    }
+    50% {
+        transform: scale(1.15, 0.85);
+    }
+    65% {
+        transform: scale(0.95, 1.05);
+    }
+    75% {
+        transform: scale(1.05, 0.95);
+    }
+    to {
+        transform: scale(1, 1);
+    }
+}
+
+.checkbox input:checked ~ .icon {
+    border-color: transparent;
+    background: #ff1616;
+    animation: jelly 0.6s ease;
+}
+
+.checkbox input:checked ~ .icon::after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+}
+/******************************************************************/
+
+.form-box { /* 모자이크 대상을 선택하는 box */ 
+    background-color: #fff;
+    padding: 19px;
+}
+.drag-bg{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 34px;
+    background-color: #000;
+    opacity: .8;
+    text-align: center;
+    color: #fff;
+    padding: 230px;
+}
+.dropzone-wrapper__input{  /* drag input */
+    display: none;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 34px;
+    margin-bottom: 12px;
+    letter-spacing: 0;
+    min-height: 100%;
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    text-align: center;
+    color: #fff;
+    padding: 230px
+}
+
+.form-box button, .form-box input{
+    width: 200px;   /* 버튼의 크기를 주어, 동영상 업로드, 동영상 다운로드, 모자이크 실행 버튼의 크기를 동일하게 해줌 */
+    margin-top: 5px;    /* 버튼 간의 간격 */
+}
+
+legend {
+    font-size: 18px;
+    border-bottom: 1px solid #e5e5e5;   /* 글자 밑 밑줄 */
+    text-align: center;
+}
+
+.form-box__checkbox-form label {
+    display: block; /* 체크박스를 일자로 정렬하기 위한 속성 */
+}
+
+.form-box__checkbox-form, .form-box__upload-form{width : 200px}
+
+.circle-img {
+    /* 테두리가 둥근 이미지를 감싸는 div (이미지를 둥글게 만들기 위해 img를 감싸는 div 태그를 추가함.)*/
+    border-radius: 70%; /* 이미지 둥글게 만들기 위한 속성 (https://gofnrk.tistory.com/28 참고)*/
+    overflow: hidden; /* overflow: hidden; 속성으로 넘치는 부분은 지워줌 */
+    float: left; /* 이미지 옆에 텍스트를 위치시키기 위해 적용시킴 */
+}
+
+.circle-img img {
+    /* 테두리가 둥근 이미지 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* object-fit 속성으로 이미지와 같은 오브젝트를 받아서 비율은 그대로 유지한 채로 이미지를 가공 */
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    background-color: #3c3935; /* footer의 배경색 */
+    height: 80px;
+}
+
+.footer__content-box {
+    /* footer 내부의 이미지와 텍스트를 감싸는 div 태그 */
+    margin-left: auto; /* left right는 가운데 정렬 */
+    margin-right: auto;
+    width: 350px; /* 크기를 잘 조정해서 내부에 있는 이미지와 텍스트가 중앙정렬 되도록 해야함.*/
+    height: 100%;
+    /* 이미지와 텍스트의 수직 중앙 정렬을 위한 속성 */
+    display: flex;
+    align-items: center;
+}
+
+.footer__img {
+    width: 70px;
+    height: 70px;
+}
+
+.footer__text {
+    /* 사이트 정보 텍스트 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+    overflow: hidden; /* 스크롤 제거 */
+    margin-bottom: 0; /* 왜 그런지 모르겠는데 margin-bottom을 0px로 지정하지 않으면 1rem으로 지정되어 있어서 footer 하단에 공백이 생김 */
+    width: 280px; /* 텍스트 영역의 width를 늘려주면 img와 텍스트 사이의 간격이 넓어짐. */
+    height: 65%; /* height 속성을 주지 않으면 footer 하단에 공백이 생겨서 height를 지정해줌. */
+    font-size: 12px;
+    color: white;
+}
+
+/**************** 햄버거 메뉴에 대한 속성 **************/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background: transparent;
+    border: none;
+}
+
+#menu {
+    width: 50px;
+    right: 20px;
+    top: 20px
+}
+
+#menu > span {
+    display: block;
+    width: 100%;
+    height: 8px;
+    background: #000;
+    margin: 4px 0;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+#menu>.on:nth-child(1) {
+    transform: translateY(15px) rotate(225deg);
+    transition-delay: 0.2s;
+}
+
+#menu>.on:nth-child(2) {
+    opacity: 0;
+    transform: translateX(50px);
+}
+
+#menu>.on:nth-child(3) {
+    transform: translateY(-11px) rotate(-225deg);
+    transition-delay: 0.2s;
+}
+
+.form-box {
+    margin-left: 20px;
+    border-radius: 30px;
+    width: 235px;
+}
+
+/*************************************************************/
+
+@media(max-width: 992px) {
+    .navbar img {
+        margin-left: auto; /* left right는 가운데 정렬 */
+        margin-right: auto;
+        width: 200px;
+        height: 100%;
+    }
+    .content-container__wrap {
+        padding: 177px 90px 33px 85px;
+    }
+}
+
+@media(max-width: 768px) {
+    .content-container__wrap {
+        padding: 100px 80px 33px;
+    }
+}
+
+@media(max-width: 576px) {
+    .content-container__wrap {
+        padding: 100px 15px 33px;
+    }
+}

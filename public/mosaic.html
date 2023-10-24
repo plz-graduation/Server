@@ -1,0 +1,130 @@
+<!DOCTYPE HTML5>
+<html>
+    <head>
+        <title>YoMo</title>
+        <link rel="icon" type="image/png" href="./images/icons/favicon.ico"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <!-- 렌더링 과정 https://boxfoxs.tistory.com/408, https://jeong-pro.tistory.com/90 참고 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/main.css">
+        <link rel = "stylesheet" href = "./css/loading.css">
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    </head>
+
+    <body >
+        <!-- drag & drop form -->
+        <form class = "drop_form" action="http://localhost:3030/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="selectFile" class="dropzone-wrapper__input" accept = "video/mp4, video/WebM, video/Ogg">
+        </form>
+        
+        <!-- navbar(상단바), shadow class를 지정하여 그림자 효과를 줌. -->
+        <nav class="navbar shadow">  
+            <a class = "navbar__main-logo" href="/mosaic.html"><img class = "navbar__img" src = "./images/YoMo_logo.png"></a>  <!-- navbar의 YoMo 로고 YoMo  폰트 : HelveticaRounded, 글자 크기 : 190, you only mosaic once 폰트 : Lucida Calligraphy, 글자크기 : 45, bold -->
+
+            <div class = "navbar__content">
+                <a href="#">Help</a>    
+                <a href="#">About</a>
+
+                <!-- 언어선택 -->
+                <select class ="navbar__languge-selector">
+                    <option value="en">English</option>
+                    <option value="de">Deutsch</option>
+                    <option value="fr">Français</option>
+                    <option value="es">español</option>
+                    <option value="ru">Русский</option>
+                    <option selected="selected" value="ko">한국어</option>
+                    <option value="ja">日本語</option>
+                    <option value="zh">简体中文</option>
+                </select>
+
+                <!-- 햄버거
+                <button type="button" name="button" id="menu">
+                    <span>asd</span>
+                    <span></span>
+                    <span></span>
+                </button> 
+                -->
+            </div>
+        </nav>
+        <!-- the낙서miri, 폰트크기 160 -->
+
+        <div class = "content-container"> <!-- video와 모자이크 대상을 선택하는 box를 감싸는 태그 -->
+            <div  class = "content-container__wrap shadow">   <!-- video 태그를 감싸는 box (그림자 효과를 줌) -->
+                <div class = "video-box">   <!-- https://plyr.io/?fbclid=IwAR2W6H5HL0-V_JO6mDsU-vP7S3Ye8s12WNDD_JWJrqkuVw4F8Kvy4-ErknI 참고 -->
+                    <video id = "player" playsinline class = "content-container__user-video none" width="100%" height="100%" autoplay controls allowfullscreen>
+                    <!-- autoplay가 설정되면, 데이터 로딩이 완료되지 않더라도 재생 가능한 시점에 자동으로 재생이 시작됨. -->
+                        영상을 출력하는데 실패하였습니다. </video>
+                </div>
+            </div>
+
+            <!-- 모자이크 대상을 선택하는 box -->
+            <div class = "shadow form-box">
+                <form class="form-box__checkbox-form" method = "post" action="http://localhost:3030/mosaic"> 
+                    <legend>모자이크 대상</legend>  <!-- legend 요소는 fieldset 요소의 제목(LEGEND)을 표시한다. fieldset 요소를 이용하여 여러 개의 컨트롤들을 묶었으면 이 묶음이 어떤 성격 또는 용도인지 알려줄 필요가 있으며, 이때 legend 요소를 사용한다. -->
+                    <div style = "margin-left : 10px; font-size : 12px">
+                        <script>
+                            function add_checkbox(checkbox_list, id_list) {  // 체크박스를 추가하는 함수 
+                                for (let i = 0; i < check_element_list.length; i++) {
+                                    document.write(`<label class = "checkbox">`)
+                                    document.write(`<input type='checkbox' name = "option" id = ${id_list[i]}>`)
+                                    document.write("<span class = 'icon'></span>")
+                                    document.write(`<span class = 'text'>${check_element_list[i]}</span>`)
+                                    document.write(`</label>`)
+                                }
+                            }
+
+                            document.write("-대상 선택")   // 유해이미지 카테고리임을 표시함 
+                            let check_element_list = ["담배", "칼"] // 유해이미지 카테고리에는 "담배"와 "칼"이 있음
+                            let id_list = ["cigarette", "knife"]
+                            add_checkbox(check_element_list, id_list) // "담배"와 "칼" 체크박스를 추가함
+                            document.write(`<br>`)  // 카테고리 사이의 간격
+
+                            // document.write(`<br>`)  // 카테고리와 버튼 사이의 간격
+                        </script>
+                    </div>
+                    <input type="hidden" name = "uploadFileName" class = "form-box__upload_file_name">
+                    <button class="btn btn-outline-danger form-box__mosaic-submit">모자이크 시작</button>
+                </form>
+
+                 <form class = "form-box__upload-form" method = "POST" action = "http://localhost:3030/upload" enctype = "multipart/form-data">
+                    <button type="button" onclick = "$('.dropzone-wrapper__input').click();" class="btn btn-outline-primary">동영상 업로드</button>
+                </form>
+             
+                <form class= "form-box__download-form "method = "post" action="http://localhost:3030/download">
+                    <input type="hidden" name = "downloadFileName" class = "form-box__download-file-name"> 
+                    <button type="submit" class="btn btn-outline-success form-box__download-submit">동영상 다운로드</button>
+                </form>
+            </div>
+            
+            <div class="drag-bg dark-bg dark-bg--strict none">
+                <span class = "drag-bg__span">파일을 여기에 올려주세요.</span>
+            </div>
+        </div>
+
+        <footer class = "shadow footer">
+            <div class = "footer__content-box">
+                <!-- https://dalggomy2.tistory.com/10 참고 -->
+                
+
+                <div class = "footer__text">
+                
+                    <strong>순천향대학교 졸업작품</strong>
+                </div>
+            </div>
+        </footer>
+
+        <div class="loading-bg dark-bg dark-bg--middle none"></div>
+
+        <div class="infinityChrome none">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+        <script src = "./js/main.js"/></script>
+
+    </body>
+</html>
