@@ -34,8 +34,8 @@ body{
 }
 
 .navbar__img{   /* Yomo 로고 */
-    width: 170px;
-    height: 100%;
+    width: 200px;
+    height: 110%;
 }
 
 .navbar__content{    /* navbar의 Help, About, 언어 설정 요소를 감싸는 태그 */
@@ -204,11 +204,14 @@ body{
     padding: 230px
 }
 
-.form-box button, .form-box input{
+.form-box button, .form-box input { /*버튼 색*/
     width: 200px;   /* 버튼의 크기를 주어, 동영상 업로드, 동영상 다운로드, 모자이크 실행 버튼의 크기를 동일하게 해줌 */
     margin-top: 5px;    /* 버튼 간의 간격 */
+    font-family: "Great Vibes", "Roboto", "Arial", "Malgun Gothic", "맑은 고딕", "Dotum", sans-serif;  /* Great Vibes 폰트를 첫 번째로 지정 */
+    font-weight: bold;  /* 텍스트를 두껍게 설정 */
+    background-color: rgb(63, 33, 33); /* 배경색 변경 */
+    color: #fcb7b7;/* 텍스트 색상 변경 */
 }
-
 legend {
     font-size: 18px;
     border-bottom: 1px solid #e5e5e5;   /* 글자 밑 밑줄 */
@@ -242,7 +245,7 @@ legend {
     width: 100%;
     text-align: center;
     color: white;
-    background-color: #3c3935; /* footer의 배경색 */
+    background-color: #ffc1cc; /* 연핑크 느낌의 배경색 */
     height: 80px;
 }
 
